@@ -1,0 +1,6 @@
+@EndUserText.label: 'Product Catalog Service'
+define service ZUI_PC_PRODUCT {
+  expose ZC_PC_Product    as Product;
+  expose ZI_PC_CategoryVH as CategoryVH;
+  expose I_Currency       as Currency;
+}

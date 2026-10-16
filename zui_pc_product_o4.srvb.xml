@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SRVB" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <SRVB>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <SRVBNAME>ZUI_PC_PRODUCT_O4</SRVBNAME>
+    <DDTEXT>Product Catalog OData V4 UI</DDTEXT>
+    <BINDING><TYPE>ODATA</TYPE><BINDING_TYPE>V4</BINDING_TYPE><CATEGORY>0</CATEGORY></BINDING>
+    <SERVICES><SRVB_SERVICE><NAME>ZUI_PC_PRODUCT</NAME><VERSIONS><SRVB_SERVICE_VERSION><VERSION>0001</VERSION><SRVDNAME>ZUI_PC_PRODUCT</SRVDNAME></SRVB_SERVICE_VERSION></VERSIONS></SRVB_SERVICE></SERVICES>
+   </SRVB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

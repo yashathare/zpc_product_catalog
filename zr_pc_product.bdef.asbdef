@@ -1,0 +1,55 @@
+managed implementation in class zbp_r_pc_product unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_PC_PRODUCT alias Product
+persistent table zpc_product
+draft table zpc_product_d
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) ProductUuid;
+  field ( readonly ) CreatedBy, CreatedAt, LastChangedAt, LocalLastChangedAt;
+  field ( mandatory : create ) ProductId;
+  field ( readonly : update )  ProductId;
+  field ( mandatory ) ProductName, Category, Price, CurrencyCode;
+
+  determination setDefaults on modify { create; }
+
+  validation validateProductId on save { create; field ProductId; }
+  validation validatePrice     on save { create; field Price; }
+  validation validateStock     on save { create; field Stock; }
+  validation validateCurrency  on save { create; field CurrencyCode; }
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare
+  {
+    validation validateProductId;
+    validation validatePrice;
+    validation validateStock;
+    validation validateCurrency;
+  }
+
+  mapping for zpc_product
+  {
+    ProductUuid        = product_uuid;
+    ProductId          = product_id;
+    ProductName        = product_name;
+    Category           = category;
+    Price              = price;
+    CurrencyCode       = currency_code;
+    Stock              = stock;
+    Description        = description;
+    CreatedBy          = created_by;
+    CreatedAt          = created_at;
+    LastChangedAt      = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

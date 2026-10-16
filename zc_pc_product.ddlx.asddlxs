@@ -1,0 +1,79 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Product',
+    typeNamePlural: 'Products',
+    title:       { type: #STANDARD, value: 'ProductName' },
+    description: { type: #STANDARD, value: 'ProductId' }
+  },
+  presentationVariant: [{
+    sortOrder: [{ by: 'ProductId', direction: #ASC }],
+    visualizations: [{ type: #AS_LINEITEM }]
+  }]
+}
+annotate entity ZC_PC_Product with
+{
+  @UI.facet: [
+    { id: 'idGeneral',     type: #COLLECTION, label: 'General Information', position: 10 },
+    { id: 'idBasic',       parentId: 'idGeneral', type: #FIELDGROUP_REFERENCE, label: 'Basic Data',      targetQualifier: 'Basic',       position: 10 },
+    { id: 'idPricing',     parentId: 'idGeneral', type: #FIELDGROUP_REFERENCE, label: 'Pricing & Stock', targetQualifier: 'Pricing',     position: 20 },
+    { id: 'idDescription', type: #FIELDGROUP_REFERENCE, label: 'Description',         targetQualifier: 'Description', position: 20 },
+    { id: 'idAdmin',       type: #FIELDGROUP_REFERENCE, label: 'Administrative Data', targetQualifier: 'Admin',       position: 30 }
+  ]
+
+  @UI.hidden: true
+  ProductUuid;
+
+  @UI.lineItem:       [{ position: 10, importance: #HIGH }]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.fieldGroup:     [{ qualifier: 'Basic', position: 10 }]
+  ProductId;
+
+  @UI.lineItem:       [{ position: 20, importance: #HIGH }]
+  @UI.selectionField: [{ position: 20 }]
+  @UI.fieldGroup:     [{ qualifier: 'Basic', position: 20 }]
+  ProductName;
+
+  @UI.lineItem:       [{ position: 30, importance: #HIGH }]
+  @UI.selectionField: [{ position: 30 }]
+  @UI.fieldGroup:     [{ qualifier: 'Basic', position: 30 }]
+  Category;
+
+  @UI.lineItem:       [{ position: 40, importance: #HIGH }]
+  @UI.selectionField: [{ position: 40 }]
+  @UI.fieldGroup:     [{ qualifier: 'Pricing', position: 10 }]
+  Price;
+
+  @UI.hidden: false
+  CurrencyCode;
+
+  @UI.dataPoint: {
+    title: 'Stock',
+    criticalityCalculation: {
+      improvementDirection: #MAXIMIZE,
+      deviationRangeLowValue: 1,
+      toleranceRangeLowValue: 10
+    }
+  }
+  @UI.lineItem:       [{ position: 50, type: #AS_DATAPOINT, importance: #HIGH }]
+  @UI.selectionField: [{ position: 50 }]
+  @UI.fieldGroup:     [{ qualifier: 'Pricing', position: 20 }]
+  Stock;
+
+  @UI.multiLineText: true
+  @UI.fieldGroup: [{ qualifier: 'Description', position: 10 }]
+  Description;
+
+  @UI.fieldGroup: [{ qualifier: 'Admin', position: 10 }]
+  CreatedBy;
+
+  @UI.lineItem:   [{ position: 60, importance: #LOW }]
+  @UI.fieldGroup: [{ qualifier: 'Admin', position: 20 }]
+  CreatedAt;
+
+  @UI.fieldGroup: [{ qualifier: 'Admin', position: 30 }]
+  LastChangedAt;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+}
